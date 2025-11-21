@@ -1,0 +1,32 @@
+src/
+│
+├── main.tsx
+├── App.tsx
+│
+├── context/
+│   ├── AuthContext.tsx
+│   └── RidesContext.tsx
+│
+├── pages/
+│   ├── LoginPage.tsx
+│   ├── ClientDashboard.tsx
+│   ├── SupplierDashboard.tsx
+│   ├── AdminDashboard.tsx
+│   └── NotFoundPage.tsx
+│
+├── components/
+│   ├── layout/
+│   │   └── MainLayout.tsx
+│   ├── auth/
+│   │   └── ProtectedRoute.tsx
+│   ├── rides/
+│   │   ├── NewRideRequestForm.tsx
+│   │   └── ClientOrdersTable.tsx
+│   └── supplier/
+│       └── NewQuoteDialog.tsx
+│
+├── data/
+│   └── mockUsers.ts       # נשתמש בו אם תרצי גם Mock מקומי
+│
+└── types/
+    └── UserRole.ts
