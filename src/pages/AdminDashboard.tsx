@@ -134,13 +134,15 @@ const AdminDashboard: React.FC = () => {
             sx={{ p: 2, mb: 2, border: "1px solid #ddd", borderRadius: 2 }}
           >
             <Typography sx={{ fontWeight: 600 }}>
-              {req.tripType} | {req.vehicleType}
+              {req.tripType}
             </Typography>
 
             <Typography>מוצא: {req.origin}</Typography>
             <Typography>
               יעדים: {req.destinations.join(" → ")}
             </Typography>
+
+            <Typography>שעת יציאה: {req.departureTime}</Typography>
             <Typography>מקומות: {req.seats}</Typography>
 
             {/* פרטי לקוח */}
@@ -199,6 +201,9 @@ const AdminDashboard: React.FC = () => {
             <Typography>מוצא: {q.rideRequestId.origin}</Typography>
             <Typography>
               יעדים: {q.rideRequestId.destinations.join(" → ")}
+            </Typography>
+            <Typography>
+              שעת יציאה: {q.rideRequestId.departureTime}
             </Typography>
             <Typography>
               נוצרה:{" "}

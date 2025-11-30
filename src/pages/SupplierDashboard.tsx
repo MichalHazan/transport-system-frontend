@@ -56,7 +56,7 @@ const SupplierDashboard: React.FC = () => {
     fetchQuotes();
   };
 
-  // 📌 בקשות פתוחות שלא אושרו לספק כלשהו
+  // 📌 בקשות פתוחות רק אם לא אושרו
   const openRequests = requests.filter((req: any) => {
     const approved = quotes.some(
       (q: any) =>
@@ -66,7 +66,7 @@ const SupplierDashboard: React.FC = () => {
     return !approved;
   });
 
-  // 📌 סינון הצעות לפי בחירת ספק
+  // 📌 סינון הצעות
   const filteredQuotes = quotes.filter((q: any) => {
     if (filter === "pending") return !q.approved && !q.canceled;
     if (filter === "approved") return q.approved;
@@ -99,12 +99,14 @@ const SupplierDashboard: React.FC = () => {
             }}
           >
             <Typography sx={{ fontWeight: 600 }}>
-              {req.tripType} | {req.vehicleType}
+              {req.tripType}
             </Typography>
 
             <Typography>
               {req.origin} → {req.destinations.join(" → ")}
             </Typography>
+
+            <Typography>שעת יציאה: {req.departureTime}</Typography>
 
             <Typography sx={{ mb: 1 }}>מקומות: {req.seats}</Typography>
 
@@ -150,7 +152,7 @@ const SupplierDashboard: React.FC = () => {
             }}
           >
             <Typography sx={{ fontWeight: 600 }}>
-              הצעת מחיר {q.price} ₪
+              מחיר: {q.price} ₪
             </Typography>
 
             <Box sx={{ mt: 1 }}>
@@ -159,18 +161,20 @@ const SupplierDashboard: React.FC = () => {
               <Typography>
                 יעדים: {q.rideRequestId.destinations.join(" → ")}
               </Typography>
-              <Typography>רכב: {q.rideRequestId.vehicleType}</Typography>
+              <Typography>
+                שעת יציאה: {q.rideRequestId.departureTime}
+              </Typography>
               <Typography>מקומות: {q.rideRequestId.seats}</Typography>
             </Box>
 
             <Typography sx={{ mt: 1 }}>
               סטטוס:{" "}
               {q.canceled ? (
-                <span style={{ color: "red" }}>מבוטל</span>
+                <span style={{ color: "red" }}>מבוטלת</span>
               ) : q.approved ? (
-                <span style={{ color: "green" }}>אושר</span>
+                <span style={{ color: "green" }}>אושרה</span>
               ) : (
-                "ממתין לאישור"
+                "ממתינה לאישור"
               )}
             </Typography>
 

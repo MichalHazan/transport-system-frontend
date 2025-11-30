@@ -1,12 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import {
-  Box,
-  Typography,
-  Paper,
-  Divider,
-  Button
-} from "@mui/material";
+import { Box, Typography, Paper, Divider, Button } from "@mui/material";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
@@ -22,6 +16,16 @@ const AdminUsersPage: React.FC = () => {
       headers: { Authorization: `Bearer ${token}` },
     });
     setUsers(res.data);
+  };
+
+  const handleDeleteUser = async (id: string) => {
+    if (!window.confirm("האם אתה בטוח שברצונך למחוק משתמש זה?")) return;
+
+    await axios.delete(`${API}/users/admin/delete/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    fetchUsers(); // טען משתמשים מחדש
   };
 
   useEffect(() => {
@@ -54,12 +58,10 @@ const AdminUsersPage: React.FC = () => {
             border: "1px solid #ddd",
             bgcolor: "#fafafa",
             direction: "rtl",
-            textAlign: "right"
+            textAlign: "right",
           }}
         >
-          <Typography sx={{ fontWeight: 600, mb: 1 }}>
-            {u.fullName}
-          </Typography>
+          <Typography sx={{ fontWeight: 600, mb: 1 }}>{u.fullName}</Typography>
 
           <Typography>תפקיד: {u.role}</Typography>
           <Typography>טלפון: {u.phone}</Typography>
@@ -85,6 +87,13 @@ const AdminUsersPage: React.FC = () => {
               )}
             </>
           )}
+          <Button
+            color="error"
+            variant="outlined"
+            onClick={() => handleDeleteUser(u._id)}
+          >
+            מחק
+          </Button>
         </Paper>
       ))}
     </Box>

@@ -20,7 +20,9 @@ interface Props {
 const ClientOrdersTable: React.FC<Props> = ({ rides, quotes, onDelete }) => {
   // פונקציה שמחשבת סטטוס בקשה
   const getStatus = (rideId: string) => {
-    const rideQuotes = quotes.filter((q: any) => q.rideRequestId?._id === rideId);
+    const rideQuotes = quotes.filter(
+      (q: any) => q.rideRequestId?._id === rideId
+    );
 
     if (rideQuotes.length === 0) return "טרם ניתנו הצעות";
 
@@ -45,6 +47,7 @@ const ClientOrdersTable: React.FC<Props> = ({ rides, quotes, onDelete }) => {
                 <TableCell>סוג נסיעה</TableCell>
                 <TableCell>מוצא</TableCell>
                 <TableCell>יעדים</TableCell>
+                <TableCell>שעת יציאה</TableCell>
                 <TableCell>מקומות</TableCell>
                 <TableCell>סטטוס</TableCell>
                 <TableCell>פעולות</TableCell>
@@ -59,6 +62,7 @@ const ClientOrdersTable: React.FC<Props> = ({ rides, quotes, onDelete }) => {
                     <TableCell>{r.tripType}</TableCell>
                     <TableCell>{r.origin}</TableCell>
                     <TableCell>{r.destinations.join(" → ")}</TableCell>
+                    <TableCell>{r.departureTime}</TableCell>
                     <TableCell>{r.seats}</TableCell>
 
                     <TableCell>
